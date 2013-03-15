@@ -5,8 +5,7 @@ WordsModel = Backbone.Model.extend({
         _.bindAll(this);
         // Pre-populate everything
         this.fetch({
-            dataType: "text",
-            error: this.error
+            dataType: "text"
         });
     },
 
@@ -35,15 +34,16 @@ WordsModel = Backbone.Model.extend({
                 if (pos[letter] == undefined) {
                     pos[letter] = {children: {}};
                 }
+                pos = pos[letter];
                 i++;
                 if (i == length) {
                     pos.word = true;
                 } else {
-                    pos = pos[letter].children;
+                    pos = pos.children;
                 }
             });
         });
-        return tree;
+        return {tree: tree};
     },
 
     error: function(model, xhr, options) {
