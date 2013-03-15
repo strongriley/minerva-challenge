@@ -19,32 +19,22 @@ WordsModel = Backbone.Model.extend({
          */
         var words, tree;
         words = text.split("\n");
-        // TODO debug
-        var limit = 100;
-        var j = 0;
-
         tree = {};
         _.each(words, function(word) {
-            // TODO debugging code
-            if (j > limit) {
-                return;
-            }
-            j++;
-
             word = word.toLowerCase();
-
+            // Reset tree position.
             // TODO more efficient to keep track of position in the tree.
-            var pos = tree;  // Always back to the top for each new word.
+            var pos = tree;
 
             var i = 0;
             var length = word.length;
             _.each(word, function(letter) {
-                // increment beforehand for simpler determination that we're
-                // at the end.
-                i++;
+                // Walk down tree for each letter.
+                // Once word is complete, mark it as a whole word.
                 if (pos[letter] == undefined) {
                     pos[letter] = {children: {}};
                 }
+                i++;
                 if (i == length) {
                     pos.word = true;
                 } else {
@@ -52,7 +42,7 @@ WordsModel = Backbone.Model.extend({
                 }
             });
         });
-
+        console.log('parsed');
         return tree;
     },
 
