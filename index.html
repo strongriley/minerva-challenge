@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Find All The Words</title>
+    </head>
+    <body>
+        <div id="search">
+            <form>
+                Letters: <input type="text" name="letters" size="200"> <br>
+                Word Size Range:
+                <input type="text" name="word-size-lower"> &mdash;
+                <input type="text" name="word-size-upper"> <br>
+                Starting Letter: <input type="text" name="starting-letter"
+                                    maxlength="1" size="1"> <br>
+                <input type="submit" name="search" value="Search">
+            </form>
+        </div>
+        <div id="matches">
+        </div>
+    </body>
+    <!-- Libraries -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.10/backbone-min.js"></script>
+
+    <!-- src -->
+    <!-- TODO use requireJS for better dependency management -->
+    <script src="js/wordsModel.js"></script>
+    <script src="js/matchModel.js"></script>
+    <script src="js/matchesCollection.js"></script>
+    <script src="js/searchView.js"></script>
+    <script src="js/matchesView.js"></script>
+    <script src="js/main.js"></script>
+</html>

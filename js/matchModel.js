@@ -1,0 +1,1 @@
+MatchModel = Backbone.Model.extend();
