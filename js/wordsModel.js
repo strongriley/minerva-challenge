@@ -11,6 +11,7 @@ WordsModel = Backbone.Model.extend({
     },
 
     parse: function(text, options) {
+        this.trigger('parse');
         /* Builds a tree out of each letter.
          * For example, the word "and" could be found at position...
          * a.children.n.children.d
@@ -42,7 +43,6 @@ WordsModel = Backbone.Model.extend({
                 }
             });
         });
-        console.log('parsed');
         return tree;
     },
 

@@ -3,6 +3,11 @@ $(function() {
     words = new WordsModel();
     // TODO fetch
     var matches = new MatchesCollection();
+
+    var wordsStatusView = new WordsStatusView({
+        model: words,
+        el: $('div#status')
+    });
     var searchView = new SearchView({
         model: words,
         el: $('div#search')
