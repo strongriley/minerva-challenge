@@ -1,5 +1,6 @@
 WordsModel = Backbone.Model.extend({
     url: 'static/words.txt',
+    word: "",
 
     initialize: function() {
         _.bindAll(this);
@@ -46,8 +47,48 @@ WordsModel = Backbone.Model.extend({
         return {tree: tree};
     },
 
-    error: function(model, xhr, options) {
-        console.log(xhr);
-        console.log(options);
+    search: function(args) {
+        var profile, tree, tree, used, self;
+        self = this;
+        profile = {};
+
+        this.trigger('search');
+
+        // Generate profile of the letters given.
+        letters = args.letters.toLowerCase();
+        _.each(letters, function(letter) {
+            self.incrementLetter(profile, letter);
+        });
+
+        // Walk the tree
+        tree = this.get('tree');
+        used = {};  // As traversing tree, keep track of letters used.
+        this.checkTree(tree, profile, used);
+    },
+
+    checkTree: function(tree, profile, used) {
+        var self = this;
+        _.each(tree, function(subtree, letter) {
+            // Filter tree
+            if (profile[letter] == undefined) return false;
+            if (used[letter] && used[letter] >= profile[letter]) return false;
+
+            self.word += letter;
+            if (subtree.word === true) {
+                self.trigger('match', self.word);
+            }
+            var innerUsed = _.clone(used);
+            self.incrementLetter(innerUsed, letter);  // Keep track of letter usage.
+            self.checkTree(subtree.children, profile, innerUsed);
+            self.word = self.word.slice(0, self.word.length-1);
+       });
+    },
+
+    incrementLetter: function(tree, letter) {
+        if (tree[letter] == undefined) {
+            tree[letter] = 1;
+        } else {
+            tree[letter]++;
+        }
     }
 });

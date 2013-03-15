@@ -15,7 +15,7 @@ SearchView = Backbone.View.extend({
             this.$('#word-size-upper').val()
         ];
         args['startingLetter'] = this.$('#starting-letter').val();
-        this.model.trigger('search', args);
+        this.model.search(args);
     },
 
     reset: function(e) {
