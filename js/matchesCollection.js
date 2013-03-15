@@ -7,7 +7,6 @@ MatchesCollection = Backbone.Collection.extend({
     },
 
     handleMatch: function(word) {
-        console.log(word);
         this.add(new MatchModel({id: word}));
     }
 });

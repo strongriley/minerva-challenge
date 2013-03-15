@@ -59,6 +59,12 @@ WordsModel = Backbone.Model.extend({
         _.each(letters, function(letter) {
             self.incrementLetter(profile, letter);
         });
+        // Additional constraints around search.
+        this.set({
+            startingLetter: args.startingLetter,
+            wordSizeMin: parseInt(args.wordSizeMin, 10) || null,
+            wordSizeMax: parseInt(args.wordSizeMax, 10) || null
+        });
 
         // Walk the tree
         tree = this.get('tree');
@@ -68,13 +74,18 @@ WordsModel = Backbone.Model.extend({
 
     checkTree: function(tree, profile, used) {
         var self = this;
+        var min = self.get('wordSizeMin');
+        var max = self.get('wordSizeMax');
+        var startingLetter = self.get('startingLetter');
         _.each(tree, function(subtree, letter) {
             // Filter tree
             if (profile[letter] == undefined) return false;
             if (used[letter] && used[letter] >= profile[letter]) return false;
+            if (startingLetter && self.word === "" && letter != self.get('startingLetter')) return false;
+            if (max && self.word.length >= max)  return false;
 
             self.word += letter;
-            if (subtree.word === true) {
+            if (subtree.word === true && (!min || self.word.length >= min)) {
                 self.trigger('match', self.word);
             }
             var innerUsed = _.clone(used);

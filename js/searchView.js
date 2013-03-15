@@ -10,10 +10,8 @@ SearchView = Backbone.View.extend({
 
         // Collect search data
         args['letters'] = this.$('#letters').val();
-        args['wordRange'] = [
-            this.$('#word-size-lower').val(),
-            this.$('#word-size-upper').val()
-        ];
+        args['wordSizeMin'] = this.$('#word-size-lower').val();
+        args['wordSizeMax'] = this.$('#word-size-upper').val();
         args['startingLetter'] = this.$('#starting-letter').val();
         this.model.search(args);
     },
