@@ -5,7 +5,10 @@ MatchesView = Backbone.View.extend({
     },
 
     appendMatch: function(model, collection, options) {
-        $(this.el).append(model.get('id'));
+        if (collection.length === 1) {
+            $(this.el).html('');
+        }
+        $(this.el).append(model.get('id') + "<br>");
     },
 
     reset: function() {
