@@ -1,8 +1,9 @@
 $(function() {
     // TODO not global. just for debugging
     words = new WordsModel();
-    // TODO fetch
-    var matches = new MatchesCollection();
+    var matches = new MatchesCollection({
+        listenForWords: words
+    });
 
     var wordsStatusView = new WordsStatusView({
         model: words,
