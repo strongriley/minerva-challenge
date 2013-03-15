@@ -1,5 +1,6 @@
 $(function() {
-    var words = new WordsModel();
+    // TODO not global. just for debugging
+    words = new WordsModel();
     // TODO fetch
     var matches = new MatchesCollection();
     var searchView = new SearchView({
