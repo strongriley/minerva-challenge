@@ -2,6 +2,7 @@ MatchesView = Backbone.View.extend({
     initialize: function() {
         this.collection.on('add', this.appendMatch, this);
         this.collection.on('reset', this.reset, this);
+        this.model.on('searchComplete', this.searchComplete, this);
     },
 
     appendMatch: function(model, collection, options) {
@@ -13,5 +14,11 @@ MatchesView = Backbone.View.extend({
 
     reset: function() {
         $(this.el).html('Searching...');
+    },
+
+    searchComplete: function() {
+        if (this.collection.length === 0) {
+            $(this.el).html("No matches.");
+        }
     }
 });

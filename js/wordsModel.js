@@ -70,6 +70,7 @@ WordsModel = Backbone.Model.extend({
         tree = this.get('tree');
         used = {};  // As traversing tree, keep track of letters used.
         this.checkTree(tree, profile, used);
+        this.trigger('searchComplete');
     },
 
     checkTree: function(tree, profile, used) {

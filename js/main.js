@@ -14,6 +14,7 @@ $(function() {
         el: $('div#search')
     });
     var matchesView = new MatchesView({
+        model: words,
         collection: matches,
         el: $('div#matches')
     });
