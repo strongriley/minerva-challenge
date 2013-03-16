@@ -8,3 +8,12 @@ header h1 {
 header.error {
     background: #c60f13;
 }
+
+.loading {
+    background-color: #ffff99;
+}
+
+.ready {
+    background-color: #5da423;
+    color: white;
+}

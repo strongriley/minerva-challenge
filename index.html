@@ -1,21 +1,61 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="/static/css/normalize.css" />
+        <link rel="stylesheet" href="/static/css/foundation.css" />
+        <link rel="stylesheet" href="/static/css/words.css" />
         <title>Find All The Words</title>
     </head>
     <body>
-        <div id="status"></div>
-        <div id="search">
-            <form>
-                Letters: <input type="text" id="letters" name="letters" size="200"> <br>
-                Word Size Range:
-                <input type="text" id="word-size-lower" name="word-size-lower"> &mdash;
-                <input type="text" id="word-size-upper" name="word-size-upper"> <br>
-                Starting Letter: <input type="text" id="starting-letter" name="starting-letter"
-                                    maxlength="1" size="1"> <br>
-                <input type="submit" name="search" value="Search">
-            </form>
+        <div class="row">
+            <div id="status" class="large-12 columns small-centered">
+            	<p class="text-center"></p>
+            </div>
         </div>
-        <div id="matches">
+        <div class="row">
+        <div class="row">
+            <div id="search" class="large-12 columns">
+                <form>
+                    <div class="row">
+                        <div class="large-2 columns"><label for="letters">Letters</label></div>
+   	                    <div class="large-10 columns"><input type="text" id="letters" name="letters" size="200"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="large-2 columns centered">
+                            <label>Word Size Range</label>
+                        </div>
+                        <div class="large-5 columns centered">
+                            <input type="text" id="word-size-lower"
+                                name="word-size-lower" placeholder="Minimum">
+                        </div>
+                        <div class="large-5 columns centered">
+                            <input type="text" id="word-size-upper"
+                                name="word-size-upper" placeholder="Maximum">
+                        </div>
+                    </div>
+                    <div class="row">
+                    	<div class="large-2 columns">
+                    		<label for="starting-letter">Starting Letter</label>
+                        </div>
+                        <div class="large-10 columns">
+                    		<input type="text" id="starting-letter" name="starting-letter"
+                                        maxlength="1" size="1">
+                        </div>
+                    </div>
+                    <div class="row"><div class="large-10 push-2 columns">
+	                    <input type="submit" name="search" value="Search" class="large button">
+                    </div></div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+        	<div class="large-10 push-2 columns">
+            <h2>Matches</h2>
+            <div id="matches">
+            	<p>Enter some letters and click search.</p>
+            </div>
         </div>
     </body>
     <!-- Libraries -->
