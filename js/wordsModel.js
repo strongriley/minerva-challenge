@@ -1,6 +1,5 @@
 WordsModel = Backbone.Model.extend({
     url: 'static/words.txt',
-    word: "",
 
     initialize: function() {
         _.bindAll(this);
@@ -53,6 +52,7 @@ WordsModel = Backbone.Model.extend({
         profile = {};
 
         this.trigger('search');
+        this.set('start', new Date());
 
         // Generate profile of the letters given.
         letters = args.letters.toLowerCase();
@@ -69,7 +69,10 @@ WordsModel = Backbone.Model.extend({
         // Walk the tree
         tree = this.get('tree');
         used = {};  // As traversing tree, keep track of letters used.
+        this.set('word', "");
         this.checkTree(tree, profile, used);
+        this.set('end', new Date());
+        console.log(this.get('end') - this.get('start'));
         this.trigger('searchComplete');
     },
 
@@ -79,20 +82,22 @@ WordsModel = Backbone.Model.extend({
         var max = self.get('wordSizeMax');
         var startingLetter = self.get('startingLetter');
         _.each(tree, function(subtree, letter) {
+            var word = self.get('word')
             // Filter tree
             if (profile[letter] == undefined) return false;
             if (used[letter] && used[letter] >= profile[letter]) return false;
-            if (startingLetter && self.word === "" && letter != self.get('startingLetter')) return false;
-            if (max && self.word.length >= max)  return false;
+            if (startingLetter && word === "" && letter != self.get('startingLetter')) return false;
+            if (max && word.length >= max)  return false;
 
-            self.word += letter;
-            if (subtree.word === true && (!min || self.word.length >= min)) {
-                self.trigger('match', self.word);
+            word = word += letter;
+            self.set('word', word);
+            if (subtree.word === true && (!min || word.length >= min)) {
+                self.trigger('match', word);
             }
             var innerUsed = _.clone(used);
             self.incrementLetter(innerUsed, letter);  // Keep track of letter usage.
             self.checkTree(subtree.children, profile, innerUsed);
-            self.word = self.word.slice(0, self.word.length-1);
+            self.set('word', word.slice(0, word.length-1));
        });
     },
 
