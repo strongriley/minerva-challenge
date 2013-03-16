@@ -61,7 +61,7 @@ WordsModel = Backbone.Model.extend({
         });
         // Additional constraints around search.
         this.set({
-            startingLetter: args.startingLetter,
+            startingLetter: args.startingLetter.toLowerCase(),
             wordSizeMin: parseInt(args.wordSizeMin, 10) || null,
             wordSizeMax: parseInt(args.wordSizeMax, 10) || null
         });
